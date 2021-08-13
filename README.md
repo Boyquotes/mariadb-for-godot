@@ -2,12 +2,26 @@
 A Godot module that provides a convenient object-orientated wrapper for MariaDB.
 
 
+## Important Licensing Note
+Since the MariaDB C connector is licensed under the LGPL license (as of the last
+time this file was updated), you cannot statically link to the MariaDB C connector
+library without making each project that statically links to it LGPL or GPL. As a
+result, I highly recommend that you always dynamically link to the MariaDB C
+connector library and distribute it alongside your projects that use it per its
+licensing terms.
+
+
 ## Instructions
 1. clone the Godot repo
 2. clone the branch of this repo that matches your Godot version into the "modules" 
 folder inside the Godot repo
 3. rename the "mariadb-for-godot" folder to "mariadb"
-4. build Godot
+4. obtain the MariaDB C connector library in binary or source form (source form
+requires that you built the connector library yourself)
+5. update the SCsub file so that the include path points to the folder containing
+the "mariadb" headers folder
+6. update the SCsub file so that the library path points to the connector library
+7. build Godot
 
 
 ## Usage

@@ -1,0 +1,26 @@
+# SCsub
+
+Import('env')
+
+module_env = env.Clone()
+module_env.add_source_files(env.modules_sources, '*.cpp')
+module_env.Append(CCFLAGS=['-O2'])
+
+if env['PLATFORM'] == 'win32':
+    include_dirs = [
+        'thirdparty/mariadb_connector_c-' + env['HOST_ARCH'] + '-windows-mingw/include'
+    ]
+    libs = [
+        File('#modules/mariadb/thirdparty/mariadb_connector_c-' + env['HOST_ARCH'] + '-windows-mingw/lib/mariadb/libmariadb.dll')
+    ]
+    
+else:
+    include_dirs = [
+        'thirdparty/mariadb_connector_c-amd64-linux-gcc/include'
+    ]
+    libs = [
+        File('#modules/mariadb/thirdparty/mariadb_connector_c-amd64-linux-gcc/lib/mariadb/libmariadb.so')
+    ]
+    
+module_env.Append(CPPPATH=include_dirs)
+env.Append(LIBS=libs)
